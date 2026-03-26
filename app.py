@@ -1,5 +1,4 @@
 from flask import Flask, render_template
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -10,7 +9,24 @@ def index():
 @app.route('/faleconosco')
 @app.route('/contato')
 def contato():
-    return render_template('contato.html')
+    dados = {"nome" : "Alba", "email" : "alba.lopes@ifrn.edu.br"}
+    return render_template('contato.html', dados = dados)
+    # nome = "Alba Lopes" 
+    # email = 'alba.lopes@ifrn.edu.br'
+    # return render_template('contato.html', nome = nome, email = email)
+
+@app.route('/usuario', defaults = {"nome" : "Desconhecido", "sobrenome" : "Desconhecido"})
+@app.route('/usuario/<nome>/<sobrenome>')
+def usuario(nome, sobrenome):
+    info = {"nome" : nome, "sobrenome" : sobrenome}
+    return render_template('usuario.html', info = info)
+
+@app.route('/semestre/<int:x>')
+def semestre(x):
+    dados = {}
+    dados["atual"] = x
+    dados["anterior"] = x - 1
+    return render_template('semestre.html', dados = dados)
 
 if __name__ == '__main__':
     app.run()
