@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <img src="{{url_for('static, filename='img/'+'usuario'+'.png')}}" alt="">
+    <img src="{{ url_for('static', filename='img/' + perfil + '.png') }}" onclick="cliqueAqui('{{perfil}}')">
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>
 </html>
