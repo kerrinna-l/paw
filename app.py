@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, request
+from datetime import datetime
 app = Flask(__name__)
 
 @app.route('/')
@@ -32,6 +33,21 @@ def semestre(x):
 @app.route('/perfil/<perfil>')
 def perfil(perfil):
     return render_template('perfil.html', perfil=perfil)
+
+@app.route('/dados')
+def dados():
+    return render_template('dados.html')
+
+@app.route('/recebedados', methods=['POST', 'GET']) 
+def recebedados():
+    nome = request.form['nome']
+    sobrenome = request.form['sobrenome']
+    email = request.form['email']
+    estado = request.form.getlist('escola')
+    data_nasc = request.form['data_nasc'] 
+    data_objeto = datetime.strptime(data_nasc, '%Y-%m-%d')
+    data_formatada = data_objeto.strftime('%d/%m/%Y')
+    return render_template('recebedados.html', nome=nome, sobrenome=sobrenome, email=email, data_nasc=data_formatada, estado=estado)
 
 if __name__ == '__main__':
     app.run()
