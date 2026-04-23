@@ -80,6 +80,21 @@ def arearestrita():
 @app.route('/acessonegado')
 def acessonegado():
     return render_template('acessonegado.html')
-           
+
+@app.route('/exemplolaco')
+def exemplolaco():
+    return render_template('exemplolaco.html')
+
+@app.route('/produtos')
+def produtos():
+    itens = [
+        {'nome': 'Teclado', 'preco': '200', 'imagem': 'https://m.media-amazon.com/images/I/61B8ljXNedL._AC_SX679_.jpg'},
+        {'nome': 'Smartphone', 'preco': '1500', 'imagem': 'https://m.media-amazon.com/images/I/61WYeXatWNL._AC_SX679_.jpg'},
+        {'nome': 'Pen-drive', 'preco': '50', 'imagem': 'https://m.media-amazon.com/images/I/41dXz6DHSFL._AC_SX679_.jpg'},
+    ]
+    qtd = len(itens)
+
+    return render_template('produtos.html', itens=itens, qtd=qtd)
+
 if __name__ == '__main__':
     app.run()
